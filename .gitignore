@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test scripts
+final_test.sh
+test_all_pages.sh
+public/images/fallbacks/download.sh
+public/images/fallbacks/image_urls.txt
+
+# Build
+tsconfig.tsbuildinfo
