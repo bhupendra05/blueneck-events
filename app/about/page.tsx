@@ -5,7 +5,8 @@ import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import { EyebrowReveal, FadeUp } from '@/components/ui/AnimatedText'
 import GlassmorphicCard from '@/components/ui/GlassmorphicCard'
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, MapPin, Phone, Mail, Clock } from 'lucide-react'
+import { SITE_CONFIG } from '@/lib/constants'
 
 const milestones = [
   { year: '2015', title: 'Founded in Mumbai', description: 'Blue Neck Events was born from a vision to redefine event management in India.' },
@@ -204,7 +205,7 @@ export default function AboutPage() {
                     className="w-full h-full object-cover img-cinematic"
                   />
                 </div>
-                <div className="flex flex-col gap-4 pt-8">
+                <div className="flex flex-col gap-4 pt-0 md:pt-8">
                   <div className="aspect-square relative overflow-hidden rounded-2xl bg-[#0A0F1C]">
                     <img
                       src={storyImages[1]}
@@ -250,37 +251,95 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="relative max-w-3xl mx-auto">
+          <div className="relative max-w-5xl mx-auto">
+            {/* Center vertical line — desktop only */}
             <div
-              className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px"
-              style={{ background: 'linear-gradient(to bottom, transparent, rgba(201,167,64,0.3), transparent)' }}
+              className="hidden md:block absolute top-0 bottom-0 w-px"
+              style={{
+                left: '50%',
+                transform: 'translateX(-50%)',
+                background: 'linear-gradient(to bottom, transparent 0%, rgba(201,167,64,0.5) 15%, rgba(201,167,64,0.5) 85%, transparent 100%)',
+              }}
             />
-            {milestones.map((milestone, index) => (
-              <motion.div
-                key={milestone.year}
-                className={`flex items-center gap-8 mb-12 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                animate={isTimelineInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.8, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <div className="flex-1">
-                  <GlassmorphicCard className={`p-5 ${index % 2 === 0 ? 'text-right' : 'text-left'}`}>
-                    <span className="text-eyebrow block mb-2">{milestone.year}</span>
-                    <h3 className="font-display font-semibold text-lg mb-2" style={{ color: '#F8F6F0' }}>
-                      {milestone.title}
-                    </h3>
-                    <p className="text-sm" style={{ color: 'rgba(248,246,240,0.5)' }}>
-                      {milestone.description}
-                    </p>
-                  </GlassmorphicCard>
-                </div>
-                <div
-                  className="w-4 h-4 rounded-full flex-shrink-0 relative z-10"
-                  style={{ background: '#C9A740', boxShadow: '0 0 15px rgba(201,167,64,0.6)' }}
-                />
-                <div className="flex-1" />
-              </motion.div>
-            ))}
+
+            {milestones.map((milestone, index) => {
+              const isLeft = index % 2 === 0
+              return (
+                <motion.div
+                  key={milestone.year}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isTimelineInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.7, delay: index * 0.13, ease: [0.16, 1, 0.3, 1] }}
+                  className="mb-8 md:mb-0 md:grid md:grid-cols-2 md:gap-0 relative"
+                >
+                  {/* LEFT column */}
+                  <div className="hidden md:flex md:justify-end md:pr-12 md:pb-12">
+                    {isLeft && (
+                      <GlassmorphicCard className="p-6 w-full max-w-sm text-right">
+                        <span className="text-eyebrow block mb-2">{milestone.year}</span>
+                        <h3 className="font-display font-semibold text-xl mb-2" style={{ color: '#F8F6F0' }}>
+                          {milestone.title}
+                        </h3>
+                        <p className="text-sm leading-relaxed" style={{ color: 'rgba(248,246,240,0.55)' }}>
+                          {milestone.description}
+                        </p>
+                      </GlassmorphicCard>
+                    )}
+                  </div>
+
+                  {/* RIGHT column */}
+                  <div className="hidden md:flex md:justify-start md:pl-12 md:pb-12">
+                    {!isLeft && (
+                      <GlassmorphicCard className="p-6 w-full max-w-sm text-left">
+                        <span className="text-eyebrow block mb-2">{milestone.year}</span>
+                        <h3 className="font-display font-semibold text-xl mb-2" style={{ color: '#F8F6F0' }}>
+                          {milestone.title}
+                        </h3>
+                        <p className="text-sm leading-relaxed" style={{ color: 'rgba(248,246,240,0.55)' }}>
+                          {milestone.description}
+                        </p>
+                      </GlassmorphicCard>
+                    )}
+                  </div>
+
+                  {/* Center dot — absolute on desktop */}
+                  <div
+                    className="hidden md:flex absolute top-6 items-center justify-center z-10"
+                    style={{ left: '50%', transform: 'translateX(-50%)' }}
+                  >
+                    <div
+                      className="w-5 h-5 rounded-full"
+                      style={{
+                        background: '#C9A740',
+                        boxShadow: '0 0 0 6px rgba(201,167,64,0.15), 0 0 20px rgba(201,167,64,0.5)',
+                      }}
+                    />
+                  </div>
+
+                  {/* MOBILE: left-rail single column */}
+                  <div className="md:hidden flex gap-4 items-start">
+                    <div className="flex flex-col items-center flex-shrink-0">
+                      <div
+                        className="w-4 h-4 rounded-full mt-1 flex-shrink-0"
+                        style={{ background: '#C9A740', boxShadow: '0 0 12px rgba(201,167,64,0.6)' }}
+                      />
+                      {index < milestones.length - 1 && (
+                        <div className="w-px flex-1 mt-2 mb-2" style={{ minHeight: '40px', background: 'rgba(201,167,64,0.25)' }} />
+                      )}
+                    </div>
+                    <GlassmorphicCard className="p-5 flex-1 mb-6 text-left">
+                      <span className="text-eyebrow block mb-1">{milestone.year}</span>
+                      <h3 className="font-display font-semibold text-lg mb-2" style={{ color: '#F8F6F0' }}>
+                        {milestone.title}
+                      </h3>
+                      <p className="text-sm leading-relaxed" style={{ color: 'rgba(248,246,240,0.55)' }}>
+                        {milestone.description}
+                      </p>
+                    </GlassmorphicCard>
+                  </div>
+                </motion.div>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -305,7 +364,7 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {teamMembers.map((member, index) => (
+            {teamMembers.map((member, index) => (
                 <motion.div
                   key={member._id ?? member.name}
                   initial={{ opacity: 0, y: 60 }}
@@ -344,9 +403,127 @@ export default function AboutPage() {
                     {member.role}
                   </p>
                 </motion.div>
-              ))}
-            </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
+      {/* ── OFFICE LOCATION ── */}
+      <section
+        className="section-padding relative overflow-hidden"
+        style={{ background: 'linear-gradient(180deg, #050508 0%, #080C14 60%, #050508 100%)' }}
+      >
+        {/* Decorative glow */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse 70% 50% at 50% 50%, rgba(201,167,64,0.04) 0%, transparent 65%)' }}
+        />
+        <div className="container-luxury relative z-10">
+          <div className="text-center mb-12">
+            <EyebrowReveal>
+              <span className="text-eyebrow">Our Office</span>
+            </EyebrowReveal>
+            <div className="overflow-hidden mt-3">
+              <FadeUp>
+                <h2 className="text-display">
+                  Come <span className="gold-text italic">Find Us</span>
+                </h2>
+              </FadeUp>
+            </div>
+            <FadeUp delay={0.15}>
+              <p className="text-sm mt-4 max-w-md mx-auto" style={{ color: 'rgba(248,246,240,0.45)' }}>
+                We&apos;d love to meet you in person. Drop by our studio or reach us any time.
+              </p>
+            </FadeUp>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
+            {/* Address */}
+            <FadeUp delay={0.1} className="lg:col-span-2">
+              <GlassmorphicCard className="p-7 h-full">
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
+                  style={{ background: 'rgba(201,167,64,0.12)', border: '1px solid rgba(201,167,64,0.25)' }}
+                >
+                  <MapPin size={22} style={{ color: '#C9A740' }} />
+                </div>
+                <span className="text-eyebrow block mb-2" style={{ fontSize: '0.65rem' }}>Our Studio</span>
+                <h3 className="font-display font-semibold text-xl mb-3" style={{ color: '#F8F6F0' }}>
+                  Mumbai, India
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: 'rgba(248,246,240,0.55)' }}>
+                  {SITE_CONFIG.address}
+                </p>
+                <a
+                  href="https://maps.google.com/?q=Mumbai,Maharashtra,India"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 mt-5 text-xs font-medium animated-underline"
+                  style={{ color: '#C9A740' }}
+                >
+                  Open in Maps <ArrowRight size={12} />
+                </a>
+              </GlassmorphicCard>
+            </FadeUp>
+
+            {/* Phone */}
+            <FadeUp delay={0.2}>
+              <GlassmorphicCard className="p-7 h-full">
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
+                  style={{ background: 'rgba(201,167,64,0.12)', border: '1px solid rgba(201,167,64,0.25)' }}
+                >
+                  <Phone size={22} style={{ color: '#C9A740' }} />
+                </div>
+                <span className="text-eyebrow block mb-2" style={{ fontSize: '0.65rem' }}>Call Us</span>
+                <h3 className="font-display font-semibold text-base mb-1" style={{ color: '#F8F6F0' }}>
+                  {SITE_CONFIG.phone}
+                </h3>
+                <p className="text-xs" style={{ color: 'rgba(248,246,240,0.4)' }}>Mon – Sat, 10am – 7pm</p>
+                <a
+                  href={`tel:${SITE_CONFIG.phone}`}
+                  className="inline-flex items-center gap-2 mt-5 text-xs font-medium animated-underline"
+                  style={{ color: '#C9A740' }}
+                >
+                  Call Now <ArrowRight size={12} />
+                </a>
+              </GlassmorphicCard>
+            </FadeUp>
+
+            {/* Email */}
+            <FadeUp delay={0.3}>
+              <GlassmorphicCard className="p-7 h-full">
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
+                  style={{ background: 'rgba(201,167,64,0.12)', border: '1px solid rgba(201,167,64,0.25)' }}
+                >
+                  <Mail size={22} style={{ color: '#C9A740' }} />
+                </div>
+                <span className="text-eyebrow block mb-2" style={{ fontSize: '0.65rem' }}>Write To Us</span>
+                <h3 className="font-display font-semibold text-base mb-1" style={{ color: '#F8F6F0' }}>
+                  {SITE_CONFIG.email}
+                </h3>
+                <p className="text-xs" style={{ color: 'rgba(248,246,240,0.4)' }}>Reply within 24 hours</p>
+                <a
+                  href={`mailto:${SITE_CONFIG.email}`}
+                  className="inline-flex items-center gap-2 mt-5 text-xs font-medium animated-underline"
+                  style={{ color: '#C9A740' }}
+                >
+                  Send Email <ArrowRight size={12} />
+                </a>
+              </GlassmorphicCard>
+            </FadeUp>
+          </div>
+
+          {/* CTA strip */}
+          <FadeUp delay={0.4}>
+            <div className="mt-10 text-center">
+              <Link href="/contact" className="btn-gold-solid inline-flex">
+                <span>Book a Meeting</span>
+                <ArrowRight size={14} />
+              </Link>
+            </div>
+          </FadeUp>
         </div>
       </section>
     </div>
