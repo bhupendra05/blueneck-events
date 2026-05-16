@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
-import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { X, ZoomIn } from 'lucide-react'
 import { EyebrowReveal, FadeUp } from '@/components/ui/AnimatedText'
 import { galleryFallbacks } from '@/lib/galleryFallback'
@@ -42,8 +42,6 @@ export default function GalleryPage() {
   const [activeCategory, setActiveCategory] = useState('All')
   const [lightboxImg, setLightboxImg] = useState<string | null>(null)
   const [allImages, setAllImages] = useState<GalleryItem[]>(STATIC_GALLERY)
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-5% 0px' })
 
   // Fetch gallery images from DB
   useEffect(() => {
@@ -105,17 +103,19 @@ export default function GalleryPage() {
       </section>
 
       {/* Filter tabs */}
-      <div className="container-luxury pt-8 pb-6" ref={ref}>
+      <div className="container-luxury pt-8 pb-6 relative z-10">
         <div className="flex gap-2 flex-wrap justify-center">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className="px-5 py-2 rounded-full text-xs font-medium tracking-wider uppercase transition-all duration-300"
+              className="px-5 py-2.5 rounded-full text-xs font-medium tracking-wider uppercase cursor-pointer"
               style={{
                 background: activeCategory === cat ? '#C9A740' : 'rgba(201,167,64,0.08)',
-                color: activeCategory === cat ? '#050508' : 'rgba(248,246,240,0.5)',
-                border: `1px solid ${activeCategory === cat ? '#C9A740' : 'rgba(201,167,64,0.15)'}`,
+                color: activeCategory === cat ? '#050508' : 'rgba(248,246,240,0.6)',
+                border: `1px solid ${activeCategory === cat ? '#C9A740' : 'rgba(201,167,64,0.2)'}`,
+                transition: 'background 0.2s, color 0.2s, border-color 0.2s',
+                WebkitTapHighlightColor: 'transparent',
               }}
             >
               {cat === 'All' ? 'All Events' : cat.charAt(0).toUpperCase() + cat.slice(1)}
@@ -124,58 +124,44 @@ export default function GalleryPage() {
         </div>
       </div>
 
-      {/* Masonry Gallery */}
+      {/* Masonry Gallery — simple key-remount fade, no layout animations */}
       <div className="container-luxury pb-24">
         <motion.div
-          className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4"
-          layout
+          key={activeCategory}
+          className="columns-1 sm:columns-2 lg:columns-3 gap-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
         >
-          <AnimatePresence mode="popLayout">
-            {filtered.map((img, index) => (
-              <motion.div
-                key={String(img.id)}
-                layout
-                custom={index}
-                variants={{
-                  hidden: { opacity: 0, scale: 0.9 },
-                  visible: (i: number) => ({
-                    opacity: 1,
-                    scale: 1,
-                    transition: { duration: 0.4, delay: i * 0.03, ease: [0.16, 1, 0.3, 1] },
-                  }),
-                  exit: { opacity: 0, scale: 0.95, transition: { duration: 0.15 } },
-                }}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                transition={{ layout: { duration: 0.3 } }}
-                className="break-inside-avoid mb-4 relative overflow-hidden rounded-xl group cursor-pointer"
-                onClick={() => setLightboxImg(img.src)}
+          {filtered.map((img) => (
+            <div
+              key={String(img.id)}
+              className="break-inside-avoid mb-4 relative overflow-hidden rounded-xl group cursor-pointer"
+              onClick={() => setLightboxImg(img.src)}
+            >
+              <img
+                src={img.src}
+                alt={img.title}
+                className="w-full block img-cinematic transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+              />
+              {/* Overlay */}
+              <div
+                className="absolute inset-0 flex items-end justify-between p-4 opacity-0 group-hover:opacity-100 transition-all duration-300"
+                style={{ background: 'linear-gradient(to top, rgba(5,5,8,0.9) 0%, transparent 60%)' }}
               >
-                <img
-                  src={img.src}
-                  alt={img.title}
-                  className="w-full block img-cinematic transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy"
-                />
-                {/* Overlay */}
+                <span className="text-sm font-display" style={{ color: '#F8F6F0' }}>
+                  {img.title}
+                </span>
                 <div
-                  className="absolute inset-0 flex items-end justify-between p-4 opacity-0 group-hover:opacity-100 transition-all duration-300"
-                  style={{ background: 'linear-gradient(to top, rgba(5,5,8,0.9) 0%, transparent 60%)' }}
+                  className="w-8 h-8 rounded-full flex items-center justify-center"
+                  style={{ background: 'rgba(201,167,64,0.2)', border: '1px solid rgba(201,167,64,0.4)' }}
                 >
-                  <span className="text-sm font-display" style={{ color: '#F8F6F0' }}>
-                    {img.title}
-                  </span>
-                  <div
-                    className="w-8 h-8 rounded-full flex items-center justify-center"
-                    style={{ background: 'rgba(201,167,64,0.2)', border: '1px solid rgba(201,167,64,0.4)' }}
-                  >
-                    <ZoomIn size={14} style={{ color: '#C9A740' }} />
-                  </div>
+                  <ZoomIn size={14} style={{ color: '#C9A740' }} />
                 </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
+              </div>
+            </div>
+          ))}
         </motion.div>
       </div>
 

@@ -12,12 +12,12 @@ export function useLenis() {
       const Lenis = (await import('@studio-freight/lenis')).default
 
       lenis = new Lenis({
-        duration: 1.4,
+        duration: 1.0,
         easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         orientation: 'vertical',
         smoothWheel: true,
         wheelMultiplier: 0.8,
-        touchMultiplier: 2,
+        touchMultiplier: 1,
       })
 
       lenisRef.current = lenis

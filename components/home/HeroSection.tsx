@@ -30,9 +30,16 @@ interface HeroStat {
   label: string
 }
 
+const FALLBACK_SLIDES: HeroSlide[] = [
+  { url: '/images/fallbacks/photo_1519741349-a57a0f88d50a.jpg', label: 'Weddings',  accent: '#C9A740' },
+  { url: '/images/fallbacks/photo_1540575467063-178a50c2df87.jpg', label: 'Galas',   accent: '#9B6FFF' },
+  { url: '/images/fallbacks/photo_1470229722913-7c0e2dbbafd3.jpg', label: 'Concerts', accent: '#FF6B6B' },
+  { url: '/images/fallbacks/photo_1505373877841-8d25f7d46678.jpg', label: 'Corporate', accent: '#4ECDC4' },
+]
+
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0)
-  const [heroImages, setHeroImages] = useState<HeroSlide[]>([])
+  const [heroImages, setHeroImages] = useState<HeroSlide[]>(FALLBACK_SLIDES)
   const [stats, setStats] = useState<HeroStat[]>(defaultStats)
   const [heroTagline, setHeroTagline] = useState('')
   const [heroSubtitle, setHeroSubtitle] = useState('')
@@ -63,7 +70,7 @@ export default function HeroSection() {
         // Tagline / subtitle
         if (data.heroTagline) setHeroTagline(data.heroTagline)
         if (data.heroSubtitle) setHeroSubtitle(data.heroSubtitle)
-        // Hero slides from settings (uploaded via admin portal)
+        // Hero slides from settings (uploaded via admin portal) — only override if real data exists
         if (data.heroSlides && data.heroSlides.length > 0) {
           const defaultAccents = ['#C9A740', '#9B59B6', '#3498DB', '#2A6BB0']
           const defaultLabels = ['Weddings', 'Galas', 'Concerts', 'Corporate']
@@ -73,23 +80,6 @@ export default function HeroSection() {
             accent: s.accent || defaultAccents[i % defaultAccents.length],
           }))
           setHeroImages(slides)
-        } else {
-          // Fallback: fetch from gallery if no hero slides in settings
-          fetch('/api/gallery?category=all')
-            .then((r) => r.json())
-            .then((gData) => {
-              if (Array.isArray(gData) && gData.length > 0) {
-                const defaultAccents = ['#C9A740', '#9B59B6', '#3498DB', '#2A6BB0']
-                const defaultLabels = ['Weddings', 'Galas', 'Concerts', 'Corporate']
-                const slides: HeroSlide[] = gData.slice(0, 4).map((item: any, i: number) => ({
-                  url: item.src,
-                  label: defaultLabels[i % defaultLabels.length] || item.title || `Slide ${i + 1}`,
-                  accent: defaultAccents[i % defaultAccents.length],
-                }))
-                setHeroImages(slides)
-              }
-            })
-            .catch(() => {})
         }
       })
       .catch(() => {
