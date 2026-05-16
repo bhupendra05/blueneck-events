@@ -100,17 +100,15 @@ export default function StatsCounter() {
           <EyebrowReveal>
             <span className="text-eyebrow">Our Legacy in Numbers</span>
           </EyebrowReveal>
-          <div className="overflow-hidden mt-3">
-            <motion.h2
-              className="text-headline"
-              initial={{ y: '100%' }}
-              animate={isInView ? { y: '0%' } : {}}
-              transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            >
-              A Decade of{' '}
-              <span className="gold-text italic">Excellence</span>
-            </motion.h2>
-          </div>
+          <motion.h2
+            className="text-headline mt-3"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          >
+            A Decade of{' '}
+            <span className="gold-text italic">Excellence</span>
+          </motion.h2>
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0">

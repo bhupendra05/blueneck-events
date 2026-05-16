@@ -100,20 +100,18 @@ export default function WhyUs() {
               <span className="text-eyebrow">Why Blue Neck Events</span>
             </EyebrowReveal>
 
-            <div className="overflow-hidden mt-4">
-              <motion.h2
-                className="text-display"
-                initial={{ y: '100%' }}
-                animate={isInView ? { y: '0%' } : {}}
-                transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              >
-                The Standard
-                <br />
-                <span className="gold-text italic">Others Aspire</span>
-                <br />
-                To Reach.
-              </motion.h2>
-            </div>
+            <motion.h2
+              className="text-display mt-4"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            >
+              The Standard
+              <br />
+              <span className="gold-text italic">Others Aspire</span>
+              <br />
+              To Reach.
+            </motion.h2>
 
             <FadeUp delay={0.35} className="mt-6">
               <p className="text-base leading-relaxed max-w-md" style={{ color: 'rgba(248,246,240,0.55)' }}>

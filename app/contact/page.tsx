@@ -100,17 +100,15 @@ export default function ContactPage() {
           <EyebrowReveal delay={0.1}>
             <span className="text-eyebrow">Get In Touch</span>
           </EyebrowReveal>
-          <div className="overflow-hidden mt-4">
-            <motion.h1
-              className="text-display"
-              initial={{ y: '100%' }}
-              animate={{ y: '0%' }}
-              transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            >
-              Let&apos;s Create Something{' '}
-              <span className="gold-text italic">Extraordinary</span>
-            </motion.h1>
-          </div>
+          <motion.h1
+            className="text-display mt-4"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          >
+            Let&apos;s Create Something{' '}
+            <span className="gold-text italic">Extraordinary</span>
+          </motion.h1>
           <FadeUp delay={0.3}>
             <p className="text-base max-w-xl mx-auto mt-5" style={{ color: 'rgba(248,246,240,0.5)' }}>
               Every great event begins with a conversation. Tell us about your vision

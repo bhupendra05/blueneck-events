@@ -102,17 +102,15 @@ export default function Testimonials() {
           <EyebrowReveal delay={0.1}>
             <span className="text-eyebrow">Client Stories</span>
           </EyebrowReveal>
-          <div className="overflow-hidden mt-3">
-            <motion.h2
-              className="text-display"
-              initial={{ y: '100%' }}
-              animate={isInView ? { y: '0%' } : {}}
-              transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            >
-              Words That{' '}
-              <span className="gold-text italic">Move Us</span>
-            </motion.h2>
-          </div>
+          <motion.h2
+            className="text-display mt-3"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          >
+            Words That{' '}
+            <span className="gold-text italic">Move Us</span>
+          </motion.h2>
         </div>
 
         {/* Testimonial carousel */}

@@ -239,17 +239,15 @@ export default function AboutPage() {
             <EyebrowReveal>
               <span className="text-eyebrow">Our Journey</span>
             </EyebrowReveal>
-            <div className="overflow-hidden mt-3">
-              <motion.h2
-                className="text-display"
-                initial={{ y: '100%' }}
-                animate={isTimelineInView ? { y: '0%' } : {}}
-                transition={{ duration: 0.9, delay: 0.1 }}
-              >
-                Nine Years of{' '}
-                <span className="gold-text italic">Milestones</span>
-              </motion.h2>
-            </div>
+            <motion.h2
+              className="text-display mt-3"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isTimelineInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.9, delay: 0.1 }}
+            >
+              Nine Years of{' '}
+              <span className="gold-text italic">Milestones</span>
+            </motion.h2>
           </div>
 
           <div className="relative max-w-5xl mx-auto">
@@ -352,16 +350,14 @@ export default function AboutPage() {
             <EyebrowReveal>
               <span className="text-eyebrow">Meet The Team</span>
             </EyebrowReveal>
-            <div className="overflow-hidden mt-3">
-              <motion.h2
-                className="text-display"
-                initial={{ y: '100%' }}
-                animate={isTeamInView ? { y: '0%' } : {}}
-                transition={{ duration: 0.9, delay: 0.1 }}
-              >
-                The <span className="gold-text italic">Architects</span>
-              </motion.h2>
-            </div>
+            <motion.h2
+              className="text-display mt-3"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isTeamInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.9, delay: 0.1 }}
+            >
+              The <span className="gold-text italic">Architects</span>
+            </motion.h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

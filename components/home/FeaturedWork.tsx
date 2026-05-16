@@ -145,17 +145,15 @@ export default function FeaturedWork() {
             <EyebrowReveal delay={0.1}>
               <span className="text-eyebrow">Signature Work</span>
             </EyebrowReveal>
-            <div className="overflow-hidden mt-3">
-              <motion.h2
-                className="text-display"
-                initial={{ y: '100%' }}
-                animate={isInView ? { y: '0%' } : {}}
-                transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              >
-                Stories We{' '}
-                <span className="gold-text italic">Crafted</span>
-              </motion.h2>
-            </div>
+            <motion.h2
+              className="text-display mt-3"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            >
+              Stories We{' '}
+              <span className="gold-text italic">Crafted</span>
+            </motion.h2>
           </div>
           <FadeUp delay={0.3}>
             <Link
@@ -191,17 +189,15 @@ export default function FeaturedWork() {
                   style={{ background: `radial-gradient(ellipse at 50% 100%, ${item.color} 0%, transparent 60%)` }}
                 />
                 <div className="absolute bottom-0 left-0 right-0 z-20 p-6">
-                  <div className="overflow-hidden mb-2">
-                    <motion.span
-                      className="block text-xs tracking-widest uppercase font-inter font-semibold mb-2"
-                      style={{ color: item.color }}
-                      initial={{ y: '100%' }}
-                      animate={isInView ? { y: '0%' } : {}}
-                      transition={{ duration: 0.6, delay: 0.3 + index * 0.15 }}
-                    >
-                      {item.category}
-                    </motion.span>
-                  </div>
+                  <motion.span
+                    className="block text-xs tracking-widest uppercase font-inter font-semibold mb-2"
+                    style={{ color: item.color }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+                    transition={{ duration: 0.6, delay: 0.3 + index * 0.15 }}
+                  >
+                    {item.category}
+                  </motion.span>
                   <h3 className="text-xl font-display font-bold mb-1" style={{ color: '#F8F6F0' }}>
                     {item.title}
                   </h3>

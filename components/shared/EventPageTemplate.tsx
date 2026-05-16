@@ -166,20 +166,18 @@ export default function EventPageTemplate({ data }: EventPageTemplateProps) {
             <EyebrowReveal delay={0.1}>
               <span className="text-eyebrow">What We Offer</span>
             </EyebrowReveal>
-            <div className="overflow-hidden mt-3">
-              <motion.h2
-                className="text-display"
-                initial={{ y: '100%' }}
-                animate={isServicesInView ? { y: '0%' } : {}}
-                transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              >
-                Our{' '}
-                <span style={{ color: data.accentColor, fontStyle: 'italic' }}>
-                  {data.label}
-                </span>
-                {' '}Services
-              </motion.h2>
-            </div>
+            <motion.h2
+              className="text-display mt-3"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isServicesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            >
+              Our{' '}
+              <span style={{ color: data.accentColor, fontStyle: 'italic' }}>
+                {data.label}
+              </span>
+              {' '}Services
+            </motion.h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -229,16 +227,14 @@ export default function EventPageTemplate({ data }: EventPageTemplateProps) {
               <EyebrowReveal delay={0.1}>
                 <span className="text-eyebrow">Our Work</span>
               </EyebrowReveal>
-              <div className="overflow-hidden mt-2">
-                <motion.h2
-                  className="text-headline"
-                  initial={{ y: '100%' }}
-                  animate={isGalleryInView ? { y: '0%' } : {}}
-                  transition={{ duration: 0.8, delay: 0.1 }}
-                >
-                  <span className="gold-text italic">{data.label}</span> Gallery
-                </motion.h2>
-              </div>
+              <motion.h2
+                className="text-headline mt-2"
+                initial={{ opacity: 0, y: 30 }}
+                animate={isGalleryInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                transition={{ duration: 0.8, delay: 0.1 }}
+              >
+                <span className="gold-text italic">{data.label}</span> Gallery
+              </motion.h2>
             </div>
             <FadeUp delay={0.2}>
               <Link

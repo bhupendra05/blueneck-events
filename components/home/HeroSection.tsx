@@ -215,23 +215,22 @@ export default function HeroSection() {
             else acc[1].push(word)
             return acc
           }, [[], []]).map((lineWords, li) => (
-            <div key={li} className="overflow-hidden mb-2 md:mb-4">
-              <motion.h1
-                className="text-hero leading-none"
-                initial={{ y: '110%' }}
-                animate={{ y: '0%' }}
-                transition={{ duration: 1.0, delay: 0.5 + li * 0.15, ease: [0.16, 1, 0.3, 1] }}
-              >
-                {li === 0 ? (
-                  <span style={{ color: '#F8F6F0' }}>{lineWords.join(' ')}</span>
-                ) : (
-                  <>
-                    <span style={{ color: '#F8F6F0' }}>{lineWords.slice(0, -1).join(' ')}{lineWords.length > 1 ? ' ' : ''}</span>
-                    <span className="gold-text italic">{lineWords[lineWords.length - 1]}</span>
-                  </>
-                )}
-              </motion.h1>
-            </div>
+            <motion.h1
+              key={li}
+              className="text-hero leading-none mb-2 md:mb-4"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.0, delay: 0.5 + li * 0.15, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {li === 0 ? (
+                <span style={{ color: '#F8F6F0' }}>{lineWords.join(' ')}</span>
+              ) : (
+                <>
+                  <span style={{ color: '#F8F6F0' }}>{lineWords.slice(0, -1).join(' ')}{lineWords.length > 1 ? ' ' : ''}</span>
+                  <span className="gold-text italic">{lineWords[lineWords.length - 1]}</span>
+                </>
+              )}
+            </motion.h1>
           ))}
 
           {/* Subheading */}
