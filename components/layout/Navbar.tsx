@@ -70,11 +70,11 @@ export default function Navbar() {
         <div className="container-luxury flex items-center justify-between h-20">
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link href="/" className="flex items-center gap-2.5 group flex-shrink-0">
             <div className="relative">
               {/* Blue neck logo mark */}
               <div
-                className="w-10 h-10 rounded-full flex items-center justify-center"
+                className="w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center"
                 style={{
                   background: 'linear-gradient(135deg, #1A4A7A, #0D2137)',
                   border: '1px solid rgba(201,167,64,0.3)',
@@ -85,13 +85,13 @@ export default function Navbar() {
             </div>
             <div className="flex flex-col leading-none">
               <span
-                className="text-lg font-display font-bold tracking-wide"
+                className="text-base md:text-lg font-display font-bold tracking-wide"
                 style={{ color: '#F8F6F0' }}
               >
                 Blue Neck
               </span>
               <span
-                className="text-[10px] tracking-[0.2em] font-inter font-medium uppercase"
+                className="text-[9px] md:text-[10px] tracking-[0.2em] font-inter font-medium uppercase"
                 style={{ color: '#C9A740' }}
               >
                 Events
@@ -100,7 +100,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden xl:flex items-center gap-1">
             {NAV_LINKS.map((link) => (
               <div
                 key={link.label}
@@ -182,7 +182,7 @@ export default function Navbar() {
           </nav>
 
           {/* CTA Button */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden xl:flex items-center gap-4">
             <Link
               href="/contact"
               className="btn-luxury text-xs"
@@ -194,7 +194,7 @@ export default function Navbar() {
           {/* Mobile Hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg transition-colors"
+            className="xl:hidden flex items-center justify-center w-12 h-12 rounded-lg transition-colors"
             style={{
               background: menuOpen ? 'rgba(201,167,64,0.1)' : 'transparent',
               border: '1px solid rgba(201,167,64,0.2)',
@@ -215,7 +215,7 @@ export default function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="fixed inset-0 z-[8999] lg:hidden flex flex-col cursor-auto"
+            className="fixed inset-0 z-[8999] xl:hidden flex flex-col cursor-auto"
             style={{ background: 'rgba(5,5,8,0.98)', backdropFilter: 'blur(30px)' }}
             initial={{ opacity: 0, clipPath: 'circle(0% at calc(100% - 2.5rem) 2.5rem)' }}
             animate={{ opacity: 1, clipPath: 'circle(150% at calc(100% - 2.5rem) 2.5rem)' }}
@@ -224,7 +224,7 @@ export default function Navbar() {
           >
             <div className="grid-pattern absolute inset-0 opacity-20" />
 
-            <div className="flex flex-col justify-center h-full px-8 gap-2">
+            <div className="flex flex-col justify-center h-full px-8 gap-2 overflow-y-auto py-24">
               {NAV_LINKS.map((link, i) => (
                 <div key={link.label}>
                   <motion.div
@@ -245,7 +245,7 @@ export default function Navbar() {
                             <Link
                               key={child.label}
                               href={child.href}
-                              className="text-lg font-display py-1"
+                              className="text-lg font-display py-3 block"
                               style={{ color: 'rgba(248,246,240,0.7)' }}
                             >
                               {child.label}

@@ -158,8 +158,8 @@ export default function HeroSection() {
       {/* Three.js Particles */}
       <HeroParticles />
 
-      {/* Slide indicators */}
-      <div className="absolute right-8 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-3">
+      {/* Slide indicators — hidden on mobile to avoid overlap with hero text */}
+      <div className="hidden md:flex absolute right-8 top-1/2 -translate-y-1/2 z-20 flex-col gap-3">
         {heroImages.map((img, i) => (
           <button
             key={i}
@@ -194,18 +194,18 @@ export default function HeroSection() {
         className="relative z-10 container-luxury full-height flex flex-col justify-center"
         style={{ opacity }}
       >
-        <div className="max-w-4xl">
+        <div className="max-w-4xl w-full">
 
           {/* Eyebrow */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="flex items-center gap-4 mb-8"
+            className="flex items-center gap-3 mb-6 md:mb-8"
           >
-            <span className="text-eyebrow">Premium Event Management</span>
-            <div className="w-12 h-px" style={{ background: 'rgba(201,167,64,0.5)' }} />
-            <span className="text-eyebrow opacity-50">Est. 2015</span>
+            <span className="text-eyebrow text-[0.65rem] md:text-[0.75rem]">Premium Event Management</span>
+            <div className="hidden sm:block w-12 h-px" style={{ background: 'rgba(201,167,64,0.5)' }} />
+            <span className="hidden sm:block text-eyebrow text-[0.65rem] md:text-[0.75rem] opacity-50">Est. 2015</span>
           </motion.div>
 
           {/* Main heading — driven by heroTagline from DB */}
@@ -215,7 +215,7 @@ export default function HeroSection() {
             else acc[1].push(word)
             return acc
           }, [[], []]).map((lineWords, li) => (
-            <div key={li} className="overflow-hidden mb-4">
+            <div key={li} className="overflow-hidden mb-2 md:mb-4">
               <motion.h1
                 className="text-hero leading-none"
                 initial={{ y: '110%' }}
@@ -236,7 +236,7 @@ export default function HeroSection() {
 
           {/* Subheading */}
           <motion.p
-            className="text-lg md:text-xl max-w-lg mt-6 mb-10"
+            className="text-sm md:text-lg max-w-lg mt-4 md:mt-6 mb-8 md:mb-10"
             style={{ color: 'rgba(248,246,240,0.6)', lineHeight: '1.7' }}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -269,7 +269,7 @@ export default function HeroSection() {
 
           {/* Stats row */}
           <motion.div
-            className="flex gap-8 mt-14 pt-10 flex-wrap"
+            className="grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-5 mt-10 pt-8"
             style={{ borderTop: '1px solid rgba(201,167,64,0.1)' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -278,7 +278,7 @@ export default function HeroSection() {
             {stats.map((stat) => (
               <div key={stat.label} className="flex flex-col">
                 <span
-                  className="text-2xl md:text-3xl font-display font-bold"
+                  className="text-xl md:text-2xl lg:text-3xl font-display font-bold"
                   style={{ color: '#C9A740' }}
                 >
                   {stat.value}

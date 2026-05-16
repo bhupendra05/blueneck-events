@@ -136,26 +136,26 @@ body {
   }
 
   .text-hero {
-    font-size: clamp(3.5rem, 8vw, 9rem);
+    font-size: clamp(2rem, 7vw, 8rem);
     font-family: var(--font-playfair);
     font-weight: 700;
-    line-height: 0.95;
+    line-height: 1.0;
     letter-spacing: -0.03em;
   }
 
   .text-display {
-    font-size: clamp(2.5rem, 5vw, 6rem);
+    font-size: clamp(1.75rem, 4.5vw, 5.5rem);
     font-family: var(--font-playfair);
     font-weight: 700;
-    line-height: 1.0;
+    line-height: 1.1;
     letter-spacing: -0.02em;
   }
 
   .text-headline {
-    font-size: clamp(1.8rem, 3.5vw, 3.5rem);
+    font-size: clamp(1.4rem, 3vw, 3rem);
     font-family: var(--font-playfair);
     font-weight: 600;
-    line-height: 1.15;
+    line-height: 1.2;
   }
 
   .text-title {
@@ -198,7 +198,7 @@ body {
   }
 
   .section-padding {
-    padding-block: clamp(5rem, 10vw, 10rem);
+    padding-block: clamp(3rem, 8vw, 8rem);
   }
 
   .full-height {
@@ -324,6 +324,7 @@ body {
   align-items: center;
   gap: 0.75rem;
   padding: 1rem 2.5rem;
+  min-height: 44px;
   background: transparent;
   border: 1px solid var(--gold);
   color: var(--gold);
@@ -364,6 +365,7 @@ body {
   align-items: center;
   gap: 0.75rem;
   padding: 1.1rem 3rem;
+  min-height: 44px;
   background: linear-gradient(135deg, #C9A740, #F0C860, #C9A740);
   background-size: 200% auto;
   color: var(--obsidian);
@@ -563,6 +565,13 @@ html.lenis {
   animation: float 4s ease-in-out infinite;
 }
 
+@media (max-width: 768px) {
+  .float-cta {
+    bottom: calc(1.25rem + env(safe-area-inset-bottom));
+    right: 1rem;
+  }
+}
+
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
@@ -600,5 +609,32 @@ html.lenis {
 
   .custom-cursor {
     display: none;
+  }
+}
+
+/* Mobile typography overrides */
+@media (max-width: 640px) {
+  .text-hero {
+    font-size: clamp(2rem, 10.5vw, 3.5rem);
+    letter-spacing: -0.02em;
+  }
+
+  .text-display {
+    font-size: clamp(1.6rem, 8.5vw, 3rem);
+    letter-spacing: -0.01em;
+  }
+
+  .text-headline {
+    font-size: clamp(1.3rem, 6.5vw, 2.25rem);
+  }
+
+  .section-padding {
+    padding-block: clamp(2.5rem, 8vw, 5rem);
+  }
+
+  .btn-gold-solid,
+  .btn-luxury {
+    padding: 0.9rem 1.75rem;
+    font-size: 0.75rem;
   }
 }

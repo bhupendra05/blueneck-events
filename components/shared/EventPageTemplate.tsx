@@ -69,13 +69,13 @@ export default function EventPageTemplate({ data }: EventPageTemplateProps) {
 
         {/* Content */}
         <motion.div
-          className="relative z-10 container-luxury full-height flex flex-col justify-center"
+          className="relative z-10 container-luxury full-height flex flex-col justify-center pt-20 md:pt-0"
           style={{ opacity: heroOpacity }}
         >
-          <div className="max-w-3xl">
+          <div className="max-w-3xl w-full">
             {/* Breadcrumb */}
             <motion.div
-              className="flex items-center gap-2 mb-8"
+              className="flex items-center gap-2 mb-5 md:mb-8"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -95,21 +95,12 @@ export default function EventPageTemplate({ data }: EventPageTemplateProps) {
               </span>
             </motion.div>
 
-            {/* Icon */}
-            <motion.div
-              className="text-5xl mb-6"
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.3, type: 'spring' }}
-            >
-              {data.icon}
-            </motion.div>
-
             {/* Tagline */}
             {taglineLines.map((line, i) => (
               <div key={i} className="overflow-hidden">
                 <motion.h1
-                  className="text-hero leading-none mb-1"
+                  className="font-display font-bold leading-none mb-1"
+                  style={{ fontSize: 'clamp(1.8rem, 5vw, 6rem)' }}
                   initial={{ y: '110%' }}
                   animate={{ y: '0%' }}
                   transition={{
@@ -137,7 +128,7 @@ export default function EventPageTemplate({ data }: EventPageTemplateProps) {
 
             {/* Description */}
             <motion.p
-              className="text-base md:text-lg max-w-xl mt-6 mb-8 leading-relaxed"
+              className="text-sm md:text-base max-w-xl mt-4 md:mt-6 mb-6 md:mb-8 leading-relaxed"
               style={{ color: 'rgba(248,246,240,0.6)' }}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -168,7 +159,7 @@ export default function EventPageTemplate({ data }: EventPageTemplateProps) {
 
             {/* Stats */}
             <motion.div
-              className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-14 pt-10 border-t"
+              className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6 mt-8 md:mt-14 pt-6 md:pt-10 border-t"
               style={{ borderColor: `${data.accentColor}18` }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -260,7 +251,7 @@ export default function EventPageTemplate({ data }: EventPageTemplateProps) {
         style={{ background: '#030305' }}
       >
         <div className="container-luxury">
-          <div className="flex items-end justify-between mb-10">
+          <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-8 gap-4">
             <div>
               <EyebrowReveal delay={0.1}>
                 <span className="text-eyebrow">Our Work</span>
@@ -331,7 +322,7 @@ export default function EventPageTemplate({ data }: EventPageTemplateProps) {
 
       {/* ── CTA SECTION ─────────────────────── */}
       <section
-        className="py-24 relative overflow-hidden"
+        className="py-16 md:py-24 relative overflow-hidden"
         style={{
           background: `linear-gradient(135deg, #050508 0%, ${data.accentColor}10 50%, #050508 100%)`,
         }}

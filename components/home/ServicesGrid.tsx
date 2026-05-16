@@ -217,17 +217,6 @@ export default function ServicesGrid() {
 
                 {/* Content */}
                 <div className="absolute inset-0 flex flex-col justify-end p-6">
-                  <motion.div
-                    className="text-3xl mb-3"
-                    animate={{
-                      scale: hoveredId === event.id ? 1.2 : 1,
-                      y: hoveredId === event.id ? -4 : 0,
-                    }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    {event.icon}
-                  </motion.div>
-
                   <div className="overflow-hidden">
                     <motion.div
                       animate={{ y: hoveredId === event.id ? -4 : 0 }}
@@ -242,8 +231,12 @@ export default function ServicesGrid() {
                     </motion.div>
                   </div>
 
+                  {/* Always visible on mobile, hover-reveal on desktop */}
+                  <p className="text-xs mt-2 leading-relaxed md:hidden" style={{ color: 'rgba(248,246,240,0.6)' }}>
+                    {event.description}
+                  </p>
                   <motion.div
-                    className="overflow-hidden"
+                    className="overflow-hidden hidden md:block"
                     animate={{
                       height: hoveredId === event.id ? 'auto' : 0,
                       opacity: hoveredId === event.id ? 1 : 0,
