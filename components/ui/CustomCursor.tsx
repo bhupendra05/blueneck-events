@@ -87,10 +87,10 @@ export default function CustomCursor() {
         <div
           className="rounded-full transition-all duration-150"
           style={{
-            width: isHovering ? '6px' : '4px',
-            height: isHovering ? '6px' : '4px',
+            width: isHovering ? '10px' : '8px',
+            height: isHovering ? '10px' : '8px',
             background: '#C9A740',
-            boxShadow: '0 0 8px rgba(201,167,64,0.8)',
+            boxShadow: '0 0 12px rgba(201,167,64,0.9)',
           }}
         />
       </div>
@@ -101,13 +101,13 @@ export default function CustomCursor() {
         className="fixed pointer-events-none z-[99998] -translate-x-1/2 -translate-y-1/2"
       >
         <div
-          className="rounded-full border transition-all duration-300"
+          className="rounded-full border-2 transition-all duration-300"
           style={{
-            width: isClicking ? '28px' : isHovering ? '48px' : '36px',
-            height: isClicking ? '28px' : isHovering ? '48px' : '36px',
-            borderColor: isHovering ? 'rgba(201,167,64,0.9)' : 'rgba(201,167,64,0.45)',
-            background: isHovering ? 'rgba(201,167,64,0.06)' : 'transparent',
-            boxShadow: isHovering ? '0 0 20px rgba(201,167,64,0.3)' : 'none',
+            width: isClicking ? '44px' : isHovering ? '68px' : '52px',
+            height: isClicking ? '44px' : isHovering ? '68px' : '52px',
+            borderColor: isHovering ? 'rgba(201,167,64,1)' : 'rgba(201,167,64,0.6)',
+            background: isHovering ? 'rgba(201,167,64,0.08)' : 'transparent',
+            boxShadow: isHovering ? '0 0 28px rgba(201,167,64,0.4)' : '0 0 10px rgba(201,167,64,0.15)',
           }}
         />
       </div>
