@@ -17,6 +17,49 @@ interface FeaturedItem {
   size: 'large' | 'small'
 }
 
+const FALLBACK_FEATURED: FeaturedItem[] = [
+  {
+    id: 'weddings',
+    title: 'Luxury Weddings',
+    subtitle: 'Where love stories become timeless memories',
+    category: 'Weddings',
+    image: '/images/fallbacks/photo_1519741349-a57a0f88d50a.jpg',
+    color: '#C9A740',
+    href: '/weddings',
+    size: 'large',
+  },
+  {
+    id: 'galas',
+    title: 'Galas & Balls',
+    subtitle: 'Sophisticated black-tie affairs of unmatched elegance',
+    category: 'Galas',
+    image: '/images/fallbacks/photo_1540575467063-178a50c2df87.jpg',
+    color: '#9B6FFF',
+    href: '/galas',
+    size: 'small',
+  },
+  {
+    id: 'concerts',
+    title: 'Concerts & Shows',
+    subtitle: 'Electrifying performances that captivate thousands',
+    category: 'Concerts',
+    image: '/images/fallbacks/photo_1470229722913-7c0e2dbbafd3.jpg',
+    color: '#FF6B6B',
+    href: '/concerts',
+    size: 'small',
+  },
+  {
+    id: 'corporate',
+    title: 'Corporate Events',
+    subtitle: 'Prestigious gatherings that define industry standards',
+    category: 'Corporate',
+    image: '/images/fallbacks/photo_1505373877841-8d25f7d46678.jpg',
+    color: '#4ECDC4',
+    href: '/corporate',
+    size: 'large',
+  },
+]
+
 function ParallaxImage({ src, alt }: { src: string; alt: string }) {
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
@@ -48,7 +91,7 @@ function ParallaxImage({ src, alt }: { src: string; alt: string }) {
 export default function FeaturedWork() {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-10% 0px' })
-  const [featuredItems, setFeaturedItems] = useState<FeaturedItem[]>([])
+  const [featuredItems, setFeaturedItems] = useState<FeaturedItem[]>(FALLBACK_FEATURED)
 
   useEffect(() => {
     // Fetch settings to get featured event IDs, then fetch events
@@ -59,7 +102,7 @@ export default function FeaturedWork() {
         fetch('/api/events')
           .then((r) => r.json())
           .then((data: any[]) => {
-            if (!Array.isArray(data) || data.length === 0) return
+            if (!Array.isArray(data) || data.length === 0) return // keep static fallback
             let sorted: any[]
             if (featuredIds.length > 0) {
               // Use featured event IDs from settings
@@ -127,13 +170,6 @@ export default function FeaturedWork() {
         </div>
 
         {/* Featured grid */}
-        {featuredItems.length === 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {[1,2,3,4].map((i) => (
-              <div key={i} className="animate-pulse rounded-2xl aspect-[4/3]" style={{ background: 'rgba(248,246,240,0.04)' }} />
-            ))}
-          </div>
-        )}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {/* Left column */}
           <div className="flex flex-col gap-5">

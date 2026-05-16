@@ -4,8 +4,30 @@ import { useState, useRef, useEffect } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { X, ZoomIn } from 'lucide-react'
 import { EyebrowReveal, FadeUp } from '@/components/ui/AnimatedText'
+import { galleryFallbacks } from '@/lib/galleryFallback'
 
 const categories = ['All', 'weddings', 'corporate', 'galas', 'social', 'concerts', 'birthdays', 'destinations', 'launches', 'sports']
+
+const CATEGORY_TITLES: Record<string, string[]> = {
+  weddings: ['Royal Wedding', 'Garden Ceremony', 'Destination Wedding', 'Intimate Celebration'],
+  corporate: ['Executive Summit', 'Product Launch', 'Annual Conference', 'Team Gala'],
+  galas: ['Black Tie Gala', 'Charity Ball', 'Awards Night', 'Grand Gala'],
+  social: ['Social Evening', 'Cocktail Party', 'Rooftop Soirée', 'Garden Party'],
+  concerts: ['Live Concert', 'Music Festival', 'Acoustic Night', 'Grand Show'],
+  birthdays: ['Luxury Birthday', 'Milestone Celebration', 'Birthday Bash', 'VIP Party'],
+  destinations: ['Destination Event', 'Beach Wedding', 'Mountain Retreat', 'City Escape'],
+  launches: ['Product Launch', 'Brand Reveal', 'Grand Opening', 'Launch Party'],
+  sports: ['Sports Gala', 'Championship Dinner', 'Sports Awards', 'Victory Celebration'],
+}
+
+const STATIC_GALLERY: GalleryItem[] = Object.entries(galleryFallbacks).flatMap(([cat, imgs]) =>
+  imgs.map((src, i) => ({
+    id: `${cat}-${i}`,
+    src,
+    category: cat,
+    title: CATEGORY_TITLES[cat]?.[i] ?? cat,
+  }))
+)
 
 interface GalleryItem {
   id: string | number
@@ -19,7 +41,7 @@ interface GalleryItem {
 export default function GalleryPage() {
   const [activeCategory, setActiveCategory] = useState('All')
   const [lightboxImg, setLightboxImg] = useState<string | null>(null)
-  const [allImages, setAllImages] = useState<GalleryItem[]>([])
+  const [allImages, setAllImages] = useState<GalleryItem[]>(STATIC_GALLERY)
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-5% 0px' })
 
@@ -28,23 +50,18 @@ export default function GalleryPage() {
     fetch('/api/gallery')
       .then((r) => r.json())
       .then((data) => {
-        if (Array.isArray(data) && data.length > 0) {
-          // Map DB format to our gallery item format
-          const dbImages: GalleryItem[] = data.map((item: any) => ({
-            id: item._id,
-            src: item.src,
-            category: item.category,
-            title: item.title || item.category,
-            cols: item.cols ?? 1,
-            rows: item.rows ?? 1,
-          }))
-          // Merge: DB images first, then any static images whose categories aren't covered
-          setAllImages(dbImages)
-        }
+        if (!Array.isArray(data) || data.length === 0) return // keep static fallback
+        const dbImages: GalleryItem[] = data.map((item: any) => ({
+          id: item._id,
+          src: item.src,
+          category: item.category,
+          title: item.title || item.category,
+          cols: item.cols ?? 1,
+          rows: item.rows ?? 1,
+        }))
+        setAllImages(dbImages)
       })
-      .catch(() => {
-        // silently fall back to static defaults
-      })
+      .catch(() => {})
   }, [])
 
   const filtered = activeCategory === 'All'

@@ -24,16 +24,49 @@ interface TeamMember {
   bio: string
 }
 
+const FALLBACK_HERO = '/images/fallbacks/photo_1511795409834-ef04bbd61622.jpg'
+const FALLBACK_STORY = [
+  '/images/fallbacks/photo_1519167758481-83f550bb49b3.jpg',
+  '/images/fallbacks/photo_1552664730-d307ca884978.jpg',
+  '/images/fallbacks/photo_1514525253161-7a6c1cc1a1a6.jpg',
+]
+const FALLBACK_TEAM: TeamMember[] = [
+  {
+    name: 'Arjun Mehta',
+    role: 'Founder & Creative Director',
+    image: '/images/fallbacks/photo_1519741349-a57a0f88d50a.jpg',
+    bio: 'With 15+ years in luxury event design, Arjun brings visionary thinking to every occasion.',
+  },
+  {
+    name: 'Priya Sharma',
+    role: 'Head of Weddings',
+    image: '/images/fallbacks/photo_1540575467063-178a50c2df87.jpg',
+    bio: 'Priya has curated over 300 destination weddings across India and beyond.',
+  },
+  {
+    name: 'Rohan Kapoor',
+    role: 'Corporate Events Lead',
+    image: '/images/fallbacks/photo_1505373877841-8d25f7d46678.jpg',
+    bio: 'Rohan specializes in high-stakes corporate productions for Fortune 500 brands.',
+  },
+  {
+    name: 'Neha Patel',
+    role: 'Production & Logistics',
+    image: '/images/fallbacks/photo_1470229722913-7c0e2dbbafd3.jpg',
+    bio: 'Neha ensures every moving part works flawlessly behind the scenes.',
+  },
+]
+
 export default function AboutPage() {
   const heroRef = useRef<HTMLDivElement>(null)
   const teamRef = useRef<HTMLDivElement>(null)
   const timelineRef = useRef<HTMLDivElement>(null)
 
-  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([])
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>(FALLBACK_TEAM)
   const [eventsCount, setEventsCount] = useState<string>('850+')
-  const [heroImage, setHeroImage] = useState<string>('')
-  const [storyImages, setStoryImages] = useState<string[]>([])
-  const [loaded, setLoaded] = useState(false)
+  const [heroImage, setHeroImage] = useState<string>(FALLBACK_HERO)
+  const [storyImages, setStoryImages] = useState<string[]>(FALLBACK_STORY)
+  const [loaded, setLoaded] = useState(true)
 
   const isTeamInView = useInView(teamRef, { once: true, margin: '-10% 0px' })
   const isTimelineInView = useInView(timelineRef, { once: true, margin: '-10% 0px' })
@@ -43,15 +76,11 @@ export default function AboutPage() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
 
   useEffect(() => {
-    // Fetch team members
     fetch('/api/team')
       .then((r) => r.json())
-      .then((data) => {
-        if (Array.isArray(data) && data.length > 0) setTeamMembers(data)
-      })
+      .then((data) => { if (Array.isArray(data) && data.length > 0) setTeamMembers(data) })
       .catch(() => {})
 
-    // Fetch settings for eventsCount
     fetch('/api/settings')
       .then((r) => r.json())
       .then((data) => {
@@ -62,48 +91,15 @@ export default function AboutPage() {
       })
       .catch(() => {})
 
-    // Fetch gallery images for hero and story sections
     fetch('/api/gallery')
       .then((r) => r.json())
       .then((data: any[]) => {
-        if (!Array.isArray(data) || data.length === 0) {
-          // Use fallback images if gallery is empty
-          setHeroImage('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1920&q=80')
-          setStoryImages([
-            'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=800&q=80',
-            'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=800&q=80',
-            'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80',
-          ])
-          setLoaded(true)
-          return
-        }
+        if (!Array.isArray(data) || data.length === 0) return // keep local fallbacks
         const srcs = data.filter((d) => d.src).map((d) => d.src)
         if (srcs[0]) setHeroImage(srcs[0])
-        if (srcs[1] && srcs[2] && srcs[3]) {
-          setStoryImages([srcs[1], srcs[2], srcs[3]])
-        } else if (srcs[1] && srcs[2]) {
-          setStoryImages([srcs[0], srcs[1], srcs[2]])
-        } else {
-          // Use fallback if not enough images
-          setHeroImage(srcs[0] || 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1920&q=80')
-          setStoryImages([
-            srcs[1] || 'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=800&q=80',
-            srcs[2] || 'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=800&q=80',
-            srcs[3] || 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80',
-          ])
-        }
-        setLoaded(true)
+        if (srcs[1] && srcs[2] && srcs[3]) setStoryImages([srcs[1], srcs[2], srcs[3]])
       })
-      .catch(() => {
-        // Fallback on error
-        setHeroImage('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1920&q=80')
-        setStoryImages([
-          'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=800&q=80',
-          'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=800&q=80',
-          'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80',
-        ])
-        setLoaded(true)
-      })
+      .catch(() => {})
   }, [])
 
   return (
@@ -308,8 +304,7 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {teamMembers.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {teamMembers.map((member, index) => (
                 <motion.div
                   key={member._id ?? member.name}
@@ -351,20 +346,7 @@ export default function AboutPage() {
                 </motion.div>
               ))}
             </div>
-          )}
 
-          {/* Loading skeleton while team is fetching */}
-          {teamMembers.length === 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[1,2,3,4].map((i) => (
-                <div key={i} className="animate-pulse">
-                  <div className="rounded-2xl aspect-[3/4] mb-4" style={{ background: 'rgba(248,246,240,0.05)' }} />
-                  <div className="h-5 w-3/4 rounded mb-2" style={{ background: 'rgba(248,246,240,0.05)' }} />
-                  <div className="h-3 w-1/2 rounded" style={{ background: 'rgba(201,167,64,0.1)' }} />
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       </section>
     </div>
