@@ -118,44 +118,45 @@ export default function AboutPage() {
         <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 50% 60% at 30% 50%, rgba(13,33,55,0.5) 0%, transparent 60%)', zIndex: 2 }} />
 
         <motion.div
-          className="relative z-10 container-luxury full-height flex flex-col justify-center"
+          className="relative z-10 container-luxury full-height flex flex-col justify-center pt-20 md:pt-0"
           style={{ opacity: heroOpacity }}
         >
-          <div className="max-w-3xl">
+          <div className="max-w-3xl w-full">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="mb-8"
+              className="mb-6"
             >
               <span className="text-eyebrow">Our Story</span>
             </motion.div>
-            <div className="overflow-hidden">
-              <motion.h1
-                className="text-hero leading-none"
-                initial={{ y: '110%' }}
-                animate={{ y: '0%' }}
-                transition={{ duration: 1.0, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <span style={{ color: '#F8F6F0' }}>The Team </span>
-              </motion.h1>
-            </div>
-            <div className="overflow-hidden">
-              <motion.h1
-                className="text-hero leading-none"
-                initial={{ y: '110%' }}
-                animate={{ y: '0%' }}
-                transition={{ duration: 1.0, delay: 0.42, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <span className="gold-text italic">Behind The Magic</span>
-              </motion.h1>
-            </div>
-            <motion.p
-              className="text-lg max-w-xl mt-6 leading-relaxed"
-              style={{ color: 'rgba(248,246,240,0.6)' }}
-              initial={{ opacity: 0, y: 30 }}
+
+            <motion.h1
+              className="font-display font-bold leading-tight mb-2"
+              style={{ fontSize: 'clamp(2rem, 5vw, 6rem)', color: '#F8F6F0' }}
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
+              transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            >
+              The Team
+            </motion.h1>
+
+            <motion.h1
+              className="font-display font-bold leading-tight italic gold-text"
+              style={{ fontSize: 'clamp(2rem, 5vw, 6rem)' }}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.42, ease: [0.16, 1, 0.3, 1] }}
+            >
+              Behind The Magic
+            </motion.h1>
+
+            <motion.p
+              className="text-sm md:text-base max-w-xl mt-6 leading-relaxed"
+              style={{ color: 'rgba(248,246,240,0.6)' }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
             >
               Since 2015, we have been on a singular mission: to create events
               that transcend expectations and live permanently in memory.

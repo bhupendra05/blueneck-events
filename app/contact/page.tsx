@@ -88,7 +88,7 @@ export default function ContactPage() {
     <div style={{ background: '#050508' }}>
       {/* Hero */}
       <section
-        className="relative pt-40 pb-20 overflow-hidden"
+        className="relative pt-28 md:pt-40 pb-12 md:pb-20 overflow-hidden"
         style={{ background: 'linear-gradient(180deg, #0A0F1C 0%, #050508 100%)' }}
       >
         <div className="absolute inset-0 grid-pattern opacity-20" />
@@ -199,7 +199,7 @@ export default function ContactPage() {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               >
-                <GlassmorphicCard className="p-8">
+                <GlassmorphicCard className="p-5 md:p-8">
                   {!submitted ? (
                     <form onSubmit={handleSubmit} className="space-y-6">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">

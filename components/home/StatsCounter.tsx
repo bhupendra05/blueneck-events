@@ -85,7 +85,7 @@ export default function StatsCounter() {
 
   return (
     <section
-      className="relative py-24 overflow-hidden"
+      className="relative py-16 md:py-24 overflow-hidden"
       style={{ background: 'linear-gradient(180deg, #050508 0%, #0A0F1C 50%, #050508 100%)' }}
     >
       <div
@@ -128,7 +128,7 @@ export default function StatsCounter() {
                   style={{ background: 'rgba(201,167,64,0.15)' }}
                 />
               )}
-              <span className="text-5xl md:text-6xl lg:text-7xl font-display font-bold" style={{ color: '#C9A740' }}>
+              <span className="text-4xl md:text-5xl lg:text-7xl font-display font-bold" style={{ color: '#C9A740' }}>
                 <Counter target={stat.value} suffix={stat.suffix} />
               </span>
               <div className="w-8 h-0.5 my-3" style={{ background: 'linear-gradient(90deg, transparent, #C9A740, transparent)' }} />

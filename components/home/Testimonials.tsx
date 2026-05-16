@@ -89,7 +89,7 @@ export default function Testimonials() {
 
       {/* Large decorative quote mark */}
       <div
-        className="absolute top-12 left-1/2 -translate-x-1/2 font-display text-[20rem] leading-none pointer-events-none select-none"
+        className="hidden md:block absolute top-12 left-1/2 -translate-x-1/2 font-display text-[20rem] leading-none pointer-events-none select-none"
         style={{ color: 'rgba(201,167,64,0.025)', lineHeight: 1 }}
       >
         &ldquo;
@@ -188,19 +188,24 @@ export default function Testimonials() {
               <ChevronLeft size={20} style={{ color: '#C9A740' }} />
             </button>
 
-            {/* Dots */}
-            <div className="flex gap-2">
+            {/* Dots — padded for 44px tap target */}
+            <div className="flex gap-1 items-center">
               {testimonials.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrent(i)}
-                  className="rounded-full transition-all duration-300"
-                  style={{
-                    width: i === current ? '24px' : '6px',
-                    height: '6px',
-                    background: i === current ? '#C9A740' : 'rgba(201,167,64,0.25)',
-                  }}
-                />
+                  className="p-3 flex items-center justify-center"
+                  aria-label={`Go to testimonial ${i + 1}`}
+                >
+                  <span
+                    className="block rounded-full transition-all duration-300"
+                    style={{
+                      width: i === current ? '24px' : '6px',
+                      height: '6px',
+                      background: i === current ? '#C9A740' : 'rgba(201,167,64,0.25)',
+                    }}
+                  />
+                </button>
               ))}
             </div>
 

@@ -70,7 +70,7 @@ export default function GalleryPage() {
     <div style={{ background: '#050508', minHeight: '100vh' }}>
       {/* Hero */}
       <section
-        className="relative pt-40 pb-20 overflow-hidden"
+        className="relative pt-28 md:pt-40 pb-12 md:pb-20 overflow-hidden"
         style={{ background: 'linear-gradient(180deg, #0A0F1C 0%, #050508 100%)' }}
       >
         <div className="absolute inset-0 grid-pattern opacity-20" />
@@ -102,9 +102,11 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      {/* Filter tabs */}
-      <div className="container-luxury pt-8 pb-6 relative z-10">
-        <div className="flex gap-2 flex-wrap justify-center">
+      {/* Filter tabs — horizontal scroll on mobile, wrap on desktop */}
+      <div className="pt-6 pb-4 md:pt-8 md:pb-6 relative z-10">
+        <div className="flex gap-2 overflow-x-auto md:flex-wrap md:justify-center px-4 md:px-0 md:container-luxury pb-2 md:pb-0"
+          style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
+        >
           {categories.map((cat) => (
             <button
               key={cat}
@@ -116,6 +118,8 @@ export default function GalleryPage() {
                 border: `1px solid ${activeCategory === cat ? '#C9A740' : 'rgba(201,167,64,0.2)'}`,
                 transition: 'background 0.2s, color 0.2s, border-color 0.2s',
                 WebkitTapHighlightColor: 'transparent',
+                flexShrink: 0,
+                minHeight: '44px',
               }}
             >
               {cat === 'All' ? 'All Events' : cat.charAt(0).toUpperCase() + cat.slice(1)}
@@ -145,9 +149,9 @@ export default function GalleryPage() {
                 className="w-full block img-cinematic transition-transform duration-700 group-hover:scale-105"
                 loading="lazy"
               />
-              {/* Overlay */}
+              {/* Overlay — always visible on mobile, hover on desktop */}
               <div
-                className="absolute inset-0 flex items-end justify-between p-4 opacity-0 group-hover:opacity-100 transition-all duration-300"
+                className="absolute inset-0 flex items-end justify-between p-4 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300"
                 style={{ background: 'linear-gradient(to top, rgba(5,5,8,0.9) 0%, transparent 60%)' }}
               >
                 <span className="text-sm font-display" style={{ color: '#F8F6F0' }}>
