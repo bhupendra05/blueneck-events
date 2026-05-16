@@ -12,7 +12,7 @@ const fallback = {
   id: 'social', label: 'Social Events', tagline: 'Celebrations Worth\nRemembering.',
   description: 'Life\'s greatest moments deserve to be celebrated in style. Our social event specialists bring creativity, joy, and unforgettable energy to every gathering.',
   heroImage: '', // Will be fetched from database
-  accentColor: '#F0C860', secondaryColor: '#C9A740', mood: 'social', icon: '🎉',
+  accentColor: '#C9A740', secondaryColor: '#E8D5B0', mood: 'social', icon: '🎉',
   services: [
     { title: 'Theme Parties', description: 'Fully immersive themed events from Bollywood nights to retro galas.' },
     { title: 'Reunion Events', description: 'School, college, and family reunions that reignite connections.' },

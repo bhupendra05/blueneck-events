@@ -12,7 +12,7 @@ const fallback = {
   id: 'launches', label: 'Product Launches', tagline: 'Unveil With\nMaximum Impact.',
   description: 'Your product is ready to change the world — our launch events make sure the world is ready for your product. We create moments of reveal that the media can\'t ignore.',
   heroImage: '', // Will be fetched from database
-  accentColor: '#E74C3C', secondaryColor: '#C0392B', mood: 'launch', icon: '🚀',
+  accentColor: '#C9A740', secondaryColor: '#E8D5B0', mood: 'launch', icon: '🚀',
   services: [
     { title: 'Brand Launch Events', description: 'New brand identity reveals with full audio-visual spectacle and press coverage.' },
     { title: 'Product Unveilings', description: 'Apple-style product reveals with build-up, drama, and a moment of pure impact.' },

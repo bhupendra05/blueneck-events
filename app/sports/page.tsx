@@ -12,7 +12,7 @@ const fallback = {
   id: 'sports', label: 'Sports Events', tagline: 'Adrenaline Meets\nExcellence.',
   description: 'We understand sports. The rush, the roar of the crowd, the precision — we bring that same energy to the management of every sporting event we execute.',
   heroImage: '', // Will be fetched from database
-  accentColor: '#40C940', secondaryColor: '#207A20', mood: 'sports', icon: '🏆',
+  accentColor: '#C9A740', secondaryColor: '#E8D5B0', mood: 'sports', icon: '🏆',
   services: [
     { title: 'Tournaments & Championships', description: 'Full management of cricket, football, badminton, and multi-sport tournaments.' },
     { title: 'Marathons & Runs', description: 'City marathons, charity runs, and cycling events with complete logistics support.' },

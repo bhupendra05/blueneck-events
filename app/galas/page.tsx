@@ -12,7 +12,7 @@ const fallback = {
   id: 'galas', label: 'Luxury Galas', tagline: 'Black-Tie Moments\nRedefined.',
   description: 'We redefine what luxury truly means. Our galas are not just events — they are experiences that exist at the intersection of art, elegance, and human connection.',
   heroImage: '', // Will be fetched from database
-  accentColor: '#9B59B6', secondaryColor: '#6C3483', mood: 'gala', icon: '🥂',
+  accentColor: '#C9A740', secondaryColor: '#E8D5B0', mood: 'gala', icon: '🥂',
   services: [
     { title: 'Award Ceremonies', description: 'Industry award nights with crystal trophies, live entertainment, and red-carpet grandeur.' },
     { title: 'Charity Galas', description: 'Fundraising events that combine philanthropy with an unforgettable evening experience.' },

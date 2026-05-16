@@ -17,8 +17,8 @@ const fallback = {
   tagline: 'Elevate Your\nBrand Experience.',
   description: 'From high-stakes conferences to unforgettable product launches, we execute corporate events that position your brand at the pinnacle of industry recognition.',
   heroImage: '', // Will be fetched from database
-  accentColor: '#2A6BB0',
-  secondaryColor: '#1A4A7A',
+  accentColor: '#C9A740',
+  secondaryColor: '#E8D5B0',
   mood: 'corporate',
   icon: '🏢',
   services: [

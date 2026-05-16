@@ -73,57 +73,30 @@ export default function EventPageTemplate({ data }: EventPageTemplateProps) {
           style={{ opacity: heroOpacity }}
         >
           <div className="max-w-3xl w-full">
-            {/* Breadcrumb */}
-            <motion.div
-              className="flex items-center gap-2 mb-5 md:mb-8"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <Link
-                href="/"
-                className="text-xs tracking-widest uppercase transition-colors"
-                style={{ color: 'rgba(248,246,240,0.4)' }}
-                onMouseEnter={(e) => e.currentTarget.style.color = data.accentColor}
-                onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(248,246,240,0.4)'}
-              >
-                Home
-              </Link>
-              <span style={{ color: 'rgba(248,246,240,0.2)' }}>/</span>
-              <span className="text-xs tracking-widest uppercase" style={{ color: data.accentColor }}>
-                {data.label}
-              </span>
-            </motion.div>
-
             {/* Tagline */}
             {taglineLines.map((line, i) => (
-              <div key={i} className="overflow-hidden">
-                <motion.h1
-                  className="font-display font-bold leading-none mb-1"
-                  style={{ fontSize: 'clamp(1.8rem, 5vw, 6rem)' }}
-                  initial={{ y: '110%' }}
-                  animate={{ y: '0%' }}
-                  transition={{
-                    duration: 1.0,
-                    delay: 0.4 + i * 0.12,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                >
-                  {i === 0 ? (
-                    <span style={{ color: '#F8F6F0' }}>{line}</span>
-                  ) : (
-                    <span
-                      className="italic"
-                      style={{
-                        color: data.accentColor,
-                        WebkitTextStroke: `1px ${data.accentColor}`,
-                      }}
-                    >
-                      {line}
-                    </span>
-                  )}
-                </motion.h1>
-              </div>
+              <motion.h1
+                key={i}
+                className="font-display font-bold leading-tight mb-2"
+                style={{ fontSize: 'clamp(1.8rem, 5vw, 5.5rem)' }}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.9,
+                  delay: 0.35 + i * 0.12,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+              >
+                {i === 0 ? (
+                  <span style={{ color: '#F8F6F0' }}>{line}</span>
+                ) : (
+                  <span
+                    className="gold-text italic"
+                  >
+                    {line}
+                  </span>
+                )}
+              </motion.h1>
             ))}
 
             {/* Description */}

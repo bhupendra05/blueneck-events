@@ -12,7 +12,7 @@ const fallback = {
   id: 'birthdays', label: 'Birthday Parties', tagline: 'Every Year,\nA Grand Celebration.',
   description: 'Birthdays are more than cake and candles — they\'re chapters in your life story. We craft birthday experiences so extraordinary, guests talk about them for years.',
   heroImage: '', // Will be fetched from database
-  accentColor: '#E8A0BF', secondaryColor: '#C97B8A', mood: 'birthday', icon: '🎂',
+  accentColor: '#C9A740', secondaryColor: '#E8D5B0', mood: 'birthday', icon: '🎂',
   services: [
     { title: 'Kids\' Birthday Extravaganzas', description: 'Magical, safe, and wildly fun parties for children with themed entertainment.' },
     { title: 'Teen Celebrations', description: 'Cool, trendy, Instagram-worthy parties that teenagers will absolutely love.' },

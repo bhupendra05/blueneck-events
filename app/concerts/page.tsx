@@ -12,7 +12,7 @@ const fallback = {
   id: 'concerts', label: 'Concerts & Shows', tagline: 'Electrify\nThe Night.',
   description: 'Thousands of people. One unforgettable night. Our concert production team handles every decibel and every spotlight to deliver performances that are nothing short of legendary.',
   heroImage: '', // Will be fetched from database
-  accentColor: '#3498DB', secondaryColor: '#1A6BA6', mood: 'concert', icon: '🎸',
+  accentColor: '#C9A740', secondaryColor: '#E8D5B0', mood: 'concert', icon: '🎸',
   services: [
     { title: 'Live Music Concerts', description: 'Full-scale concert production from sound and lighting to crowd management and security.' },
     { title: 'Stand-Up Comedy Shows', description: 'Comedy night events with professional stage management and audience experience.' },

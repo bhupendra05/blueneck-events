@@ -12,7 +12,7 @@ const fallback = {
   id: 'destinations', label: 'Destination Events', tagline: 'The World As\nYour Venue.',
   description: 'Why settle for a venue when you can have a destination? Our destination event specialists manage every detail — flights, stays, permits, and pure magic — so you only experience wonder.',
   heroImage: '', // Will be fetched from database
-  accentColor: '#1ABC9C', secondaryColor: '#148F77', mood: 'destination', icon: '✈️',
+  accentColor: '#C9A740', secondaryColor: '#E8D5B0', mood: 'destination', icon: '✈️',
   services: [
     { title: 'Destination Weddings', description: 'Beachfront, hilltop, and palace weddings in India and abroad — managed flawlessly.' },
     { title: 'Goa Beach Events', description: 'Sunrise ceremonies, sunset cocktails, and late-night beach parties in Goa.' },

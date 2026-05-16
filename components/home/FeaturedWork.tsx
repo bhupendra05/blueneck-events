@@ -34,7 +34,7 @@ const FALLBACK_FEATURED: FeaturedItem[] = [
     subtitle: 'Sophisticated black-tie affairs of unmatched elegance',
     category: 'Galas',
     image: '/images/fallbacks/photo_1540575467063-178a50c2df87.jpg',
-    color: '#9B6FFF',
+    color: '#C9A740',
     href: '/galas',
     size: 'small',
   },
@@ -44,7 +44,7 @@ const FALLBACK_FEATURED: FeaturedItem[] = [
     subtitle: 'Electrifying performances that captivate thousands',
     category: 'Concerts',
     image: '/images/fallbacks/photo_1470229722913-7c0e2dbbafd3.jpg',
-    color: '#FF6B6B',
+    color: '#C9A740',
     href: '/concerts',
     size: 'small',
   },
@@ -54,7 +54,7 @@ const FALLBACK_FEATURED: FeaturedItem[] = [
     subtitle: 'Prestigious gatherings that define industry standards',
     category: 'Corporate',
     image: '/images/fallbacks/photo_1505373877841-8d25f7d46678.jpg',
-    color: '#4ECDC4',
+    color: '#C9A740',
     href: '/corporate',
     size: 'large',
   },
@@ -211,7 +211,7 @@ export default function FeaturedWork() {
                 </div>
                 <Link href={item.href} className="absolute inset-0 z-30" aria-label={`View ${item.title}`} />
                 <div
-                  className="absolute top-5 right-5 z-30 w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
+                  className="absolute top-5 right-5 z-30 w-10 h-10 rounded-full flex items-center justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300"
                   style={{ background: 'rgba(201,167,64,0.15)', border: '1px solid rgba(201,167,64,0.3)' }}
                 >
                   <ArrowRight size={16} style={{ color: '#C9A740' }} />
