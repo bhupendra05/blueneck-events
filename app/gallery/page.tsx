@@ -118,10 +118,20 @@ export default function GalleryPage() {
               <motion.div
                 key={String(img.id)}
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.5, delay: index * 0.04, ease: [0.16, 1, 0.3, 1] }}
+                custom={index}
+                variants={{
+                  hidden: { opacity: 0, scale: 0.9 },
+                  visible: (i: number) => ({
+                    opacity: 1,
+                    scale: 1,
+                    transition: { duration: 0.4, delay: i * 0.03, ease: [0.16, 1, 0.3, 1] },
+                  }),
+                  exit: { opacity: 0, scale: 0.95, transition: { duration: 0.15 } },
+                }}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                transition={{ layout: { duration: 0.3 } }}
                 className="break-inside-avoid mb-4 relative overflow-hidden rounded-xl group cursor-pointer"
                 onClick={() => setLightboxImg(img.src)}
               >

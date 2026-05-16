@@ -539,6 +539,7 @@ html.lenis {
   background: linear-gradient(90deg, var(--gold-dim), var(--gold), var(--gold-bright));
   z-index: 9997;
   transform-origin: left;
+  pointer-events: none;
 }
 
 /* ═══════════════════════════
