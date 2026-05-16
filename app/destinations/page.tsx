@@ -4,7 +4,7 @@ import { getEventById } from '@/lib/fetchData'
 import { dbEventToTemplateData } from '@/lib/eventUtils'
 import { getGalleryImages, getHeroImage } from '@/lib/galleryFallback'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 3600
 
 export const metadata: Metadata = { title: 'Destination Events', description: 'Exotic destination events in Goa, Dubai, Bali, and Maldives.' }
 
