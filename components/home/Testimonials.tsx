@@ -14,9 +14,40 @@ interface Testimonial {
   image: string
 }
 
+const FALLBACK_TESTIMONIALS: Testimonial[] = [
+  {
+    name: 'Priya & Rohit Sharma',
+    event: 'Destination Wedding, Udaipur',
+    quote: 'Blue Neck Events turned our dream wedding into something beyond imagination. Every single detail was perfect — from the floral mandap to the last dance. We still can\'t believe it was real.',
+    rating: 5,
+    image: '/images/fallbacks/photo_1519741349-a57a0f88d50a.jpg',
+  },
+  {
+    name: 'Ananya Mehta',
+    event: 'Corporate Annual Gala, Mumbai',
+    quote: 'We\'ve worked with many event companies but Blue Neck is in a different league entirely. The production quality, the attention to detail, and the seamless execution left our 800 guests absolutely stunned.',
+    rating: 5,
+    image: '/images/fallbacks/photo_1505373877841-8d25f7d46678.jpg',
+  },
+  {
+    name: 'Vikram & Deepika Nair',
+    event: 'Grand Birthday Celebration, Goa',
+    quote: 'My 40th birthday was an absolute masterpiece. The team understood exactly what I wanted and delivered something even more spectacular. Every guest is still talking about it months later.',
+    rating: 5,
+    image: '/images/fallbacks/photo_1530103862676-de8c9debad1d.jpg',
+  },
+  {
+    name: 'Rajesh Kapoor',
+    event: 'Product Launch Event, Delhi',
+    quote: 'The launch event they produced for us exceeded every expectation. The ambiance, the technology integration, and the sheer professionalism set a new standard for our brand.',
+    rating: 5,
+    image: '/images/fallbacks/photo_1492684223066-81342ee5ff30.jpg',
+  },
+]
+
 export default function Testimonials() {
   const [current, setCurrent] = useState(0)
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([])
+  const [testimonials, setTestimonials] = useState<Testimonial[]>(FALLBACK_TESTIMONIALS)
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-10% 0px' })
 
@@ -86,15 +117,6 @@ export default function Testimonials() {
 
         {/* Testimonial carousel */}
         <div className="max-w-4xl mx-auto">
-          {testimonials.length === 0 && (
-            <div className="text-center animate-pulse">
-              <div className="flex justify-center gap-1 mb-8">
-                {[1,2,3,4,5].map((i) => <div key={i} className="w-5 h-5 rounded" style={{ background: 'rgba(201,167,64,0.2)' }} />)}
-              </div>
-              <div className="h-8 w-3/4 mx-auto rounded mb-4" style={{ background: 'rgba(248,246,240,0.05)' }} />
-              <div className="h-8 w-1/2 mx-auto rounded mb-10" style={{ background: 'rgba(248,246,240,0.05)' }} />
-            </div>
-          )}
           <AnimatePresence mode="wait">
             {active && <motion.div
               key={current}

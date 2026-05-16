@@ -45,7 +45,12 @@ interface StatItem {
 export default function StatsCounter() {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-5% 0px' })
-  const [stats, setStats] = useState<StatItem[]>([])
+  const [stats, setStats] = useState<StatItem[]>([
+    { value: 850,   suffix: '+',   label: 'Events Delivered' },
+    { value: 12000, suffix: '+',   label: 'Guests Hosted' },
+    { value: 9,     suffix: ' Yrs', label: 'Of Excellence' },
+    { value: 98,    suffix: '%',   label: 'Client Satisfaction' },
+  ])
 
   useEffect(() => {
     fetch('/api/settings')
@@ -109,12 +114,6 @@ export default function StatsCounter() {
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0">
-          {stats.length === 0 && [1,2,3,4].map((i) => (
-            <div key={i} className="flex flex-col items-center animate-pulse">
-              <div className="h-16 w-24 rounded mb-3" style={{ background: 'rgba(201,167,64,0.08)' }} />
-              <div className="h-3 w-20 rounded" style={{ background: 'rgba(248,246,240,0.05)' }} />
-            </div>
-          ))}
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}

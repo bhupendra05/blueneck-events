@@ -17,11 +17,104 @@ interface EventCategory {
   icon: string
 }
 
+const FALLBACK_EVENTS: EventCategory[] = [
+  {
+    id: 'weddings',
+    label: 'Weddings',
+    tagline: 'Your Perfect Day, Flawlessly Crafted.',
+    description: 'From intimate ceremonies to grand palatial weddings — every detail obsessively perfected.',
+    href: '/weddings',
+    accentColor: '#C9A740',
+    heroImage: '/images/fallbacks/photo_1519741349-a57a0f88d50a.jpg',
+    icon: '💍',
+  },
+  {
+    id: 'corporate',
+    label: 'Corporate Events',
+    tagline: 'Where Business Meets Brilliance.',
+    description: 'Conferences, product launches, and galas that define your brand and inspire your people.',
+    href: '/corporate',
+    accentColor: '#4ECDC4',
+    heroImage: '/images/fallbacks/photo_1505373877841-8d25f7d46678.jpg',
+    icon: '🤝',
+  },
+  {
+    id: 'social',
+    label: 'Social Events',
+    tagline: 'Celebrations That Live Forever.',
+    description: 'Cocktail parties, reunions, and soirées crafted for connection and unforgettable memories.',
+    href: '/social',
+    accentColor: '#9B6FFF',
+    heroImage: '/images/fallbacks/photo_1514525253161-7a6c1cc1a1a6.jpg',
+    icon: '🥂',
+  },
+  {
+    id: 'birthdays',
+    label: 'Birthdays',
+    tagline: 'Every Year, A New Legend.',
+    description: 'Milestone birthdays transformed into grand spectacles — intimate or extravagant, always extraordinary.',
+    href: '/birthdays',
+    accentColor: '#FF6B6B',
+    heroImage: '/images/fallbacks/photo_1530103862676-de8c9debad1d.jpg',
+    icon: '🎂',
+  },
+  {
+    id: 'sports',
+    label: 'Sports Events',
+    tagline: 'Victory Deserves a Stage.',
+    description: 'Award nights, championships, and sports galas that celebrate achievement in style.',
+    href: '/sports',
+    accentColor: '#F39C12',
+    heroImage: '/images/fallbacks/photo_1461896836934-ffe607ba8211.jpg',
+    icon: '🏆',
+  },
+  {
+    id: 'galas',
+    label: 'Galas & Balls',
+    tagline: 'Elegance Without Limits.',
+    description: 'Black-tie affairs, charity balls, and awards evenings of unparalleled sophistication.',
+    href: '/galas',
+    accentColor: '#E8D5B0',
+    heroImage: '/images/fallbacks/photo_1540575467063-178a50c2df87.jpg',
+    icon: '✨',
+  },
+  {
+    id: 'launches',
+    label: 'Product Launches',
+    tagline: 'Make Your Mark Unforgettable.',
+    description: 'Brand reveals and product launches engineered for maximum impact and lasting impression.',
+    href: '/launches',
+    accentColor: '#3498DB',
+    heroImage: '/images/fallbacks/photo_1492684223066-81342ee5ff30.jpg',
+    icon: '🚀',
+  },
+  {
+    id: 'concerts',
+    label: 'Concerts & Shows',
+    tagline: 'Performances That Move Thousands.',
+    description: 'Live concerts, music festivals, and entertainment spectacles produced at the highest level.',
+    href: '/concerts',
+    accentColor: '#E74C3C',
+    heroImage: '/images/fallbacks/photo_1470229722913-7c0e2dbbafd3.jpg',
+    icon: '🎵',
+  },
+  {
+    id: 'destinations',
+    label: 'Destination Events',
+    tagline: 'The World Is Your Venue.',
+    description: 'Bali, Maldives, Udaipur, Goa — we turn dream destinations into extraordinary event backdrops.',
+    href: '/destinations',
+    accentColor: '#2ECC71',
+    heroImage: '/images/fallbacks/photo_1520250497591-112f2f40a3f4.jpg',
+    icon: '🌍',
+  },
+]
+
 export default function ServicesGrid() {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-10% 0px' })
   const [hoveredId, setHoveredId] = useState<string | null>(null)
-  const [events, setEvents] = useState<EventCategory[]>([])
+  const [events, setEvents] = useState<EventCategory[]>(FALLBACK_EVENTS)
 
   useEffect(() => {
     fetch('/api/events')
@@ -77,9 +170,6 @@ export default function ServicesGrid() {
 
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {events.length === 0 && [1,2,3,4,5,6].map((i) => (
-            <div key={i} className="animate-pulse rounded-2xl aspect-[4/3]" style={{ background: 'rgba(248,246,240,0.04)' }} />
-          ))}
           {events.map((event, index) => (
             <motion.div
               key={event.id}
