@@ -17,11 +17,16 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  // const session = await getServerSession(authOptions)
-  // if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  const session = await getServerSession(authOptions)
+  if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  await connectDB()
-  const body = await req.json()
-  const item = await Testimonial.create(body)
-  return NextResponse.json(item, { status: 201 })
+  try {
+    await connectDB()
+    const body = await req.json()
+    const item = await Testimonial.create(body)
+    return NextResponse.json(item, { status: 201 })
+  } catch (error) {
+    console.error('Testimonials POST error:', error)
+    return NextResponse.json({ error: 'Failed to create testimonial' }, { status: 500 })
+  }
 }

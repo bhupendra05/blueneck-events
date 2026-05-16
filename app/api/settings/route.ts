@@ -20,17 +20,22 @@ export async function GET() {
 }
 
 export async function PUT(req: Request) {
-  // const session = await getServerSession(authOptions)
-  // if (!session || session.user.role !== 'admin')
-  //   return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  const session = await getServerSession(authOptions)
+  if (!session || session.user.role !== 'admin')
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  await connectDB()
-  const body = await req.json()
-  let config = await SiteConfig.findOne()
-  if (!config) {
-    config = await SiteConfig.create(body)
-  } else {
-    config = await SiteConfig.findOneAndUpdate({}, body, { new: true })
+  try {
+    await connectDB()
+    const body = await req.json()
+    let config = await SiteConfig.findOne()
+    if (!config) {
+      config = await SiteConfig.create(body)
+    } else {
+      config = await SiteConfig.findOneAndUpdate({}, body, { new: true })
+    }
+    return NextResponse.json(config)
+  } catch (error) {
+    console.error('Settings PUT error:', error)
+    return NextResponse.json({ error: 'Failed to update settings' }, { status: 500 })
   }
-  return NextResponse.json(config)
 }

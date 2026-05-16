@@ -7,9 +7,13 @@ export function useLenis() {
 
   useEffect(() => {
     let lenis: { raf: (time: number) => void; destroy: () => void } | null = null
+    let animFrame: number
+    let mounted = true
 
     async function initLenis() {
       const Lenis = (await import('@studio-freight/lenis')).default
+
+      if (!mounted) return
 
       lenis = new Lenis({
         duration: 1.0,
@@ -22,25 +26,20 @@ export function useLenis() {
 
       lenisRef.current = lenis
 
-      let animFrame: number
-
       function raf(time: number) {
         lenis!.raf(time)
         animFrame = requestAnimationFrame(raf)
       }
 
       animFrame = requestAnimationFrame(raf)
-
-      return () => {
-        cancelAnimationFrame(animFrame)
-        lenis!.destroy()
-      }
     }
 
-    const cleanup = initLenis()
+    initLenis()
 
     return () => {
-      cleanup.then((fn) => fn && fn())
+      mounted = false
+      cancelAnimationFrame(animFrame)
+      lenis?.destroy()
     }
   }, [])
 

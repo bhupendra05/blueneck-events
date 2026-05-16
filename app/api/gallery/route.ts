@@ -20,16 +20,16 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
-  try {
-    // const session = await getServerSession(authOptions)
-    // if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  const session = await getServerSession(authOptions)
+  if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
+  try {
     await connectDB()
     const body = await req.json()
     const item = await Gallery.create(body)
     return NextResponse.json(item, { status: 201 })
   } catch (error) {
     console.error('Gallery POST error:', error)
-    return NextResponse.json({ error: String(error) }, { status: 500 })
+    return NextResponse.json({ error: 'Failed to create gallery item' }, { status: 500 })
   }
 }

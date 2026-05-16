@@ -17,11 +17,16 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  // const session = await getServerSession(authOptions)
-  // if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  const session = await getServerSession(authOptions)
+  if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  await connectDB()
-  const body = await req.json()
-  const event = await Event.create(body)
-  return NextResponse.json(event, { status: 201 })
+  try {
+    await connectDB()
+    const body = await req.json()
+    const event = await Event.create(body)
+    return NextResponse.json(event, { status: 201 })
+  } catch (error) {
+    console.error('Events POST error:', error)
+    return NextResponse.json({ error: 'Failed to create event' }, { status: 500 })
+  }
 }

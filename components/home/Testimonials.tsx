@@ -169,6 +169,7 @@ export default function Testimonials() {
           <div className="flex items-center justify-center gap-6 mt-12">
             <button
               onClick={prev}
+              aria-label="Previous testimonial"
               className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300"
               style={{
                 background: 'rgba(201,167,64,0.08)',
@@ -209,6 +210,7 @@ export default function Testimonials() {
 
             <button
               onClick={next}
+              aria-label="Next testimonial"
               className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300"
               style={{
                 background: 'rgba(201,167,64,0.08)',
